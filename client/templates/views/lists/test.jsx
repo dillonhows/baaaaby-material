@@ -31,17 +31,6 @@ let {
 
 { ThemeManager, LightRawTheme, DarkRawTheme } = Styles;
 
-let menuItems = [
-  { route: '/', text: '首页' },
-  { route: 'bb', text: '气质测评报告' },
-  { route: 'cc', text: '每日问答报告' },
-  {
-     text: '禁用',
-     disabled: true
-  }
-];
-
-
 Test = React.createClass({
     childContextTypes: {
         muiTheme: React.PropTypes.object
@@ -52,7 +41,7 @@ Test = React.createClass({
         };
     },
     change: function() {
-        this.refs.leftNav.toggle();
+        this.setState({open: !this.state.open});
     },
     clickMe: function () {
       console.log('显示动画效果并创建内容遮罩在列表上方');
@@ -63,6 +52,7 @@ Test = React.createClass({
     },
     getInitialState: function() {
       return {
+        open: false,
         colorText: true 
       };
     },
@@ -84,7 +74,11 @@ Test = React.createClass({
                 <meta httpEquiv='X-UA-Compatible' content='IE=Edge,chrome=1' />
             </header>
             <AppCanvas>
-            <LeftNav ref="leftNav" docked={false} menuItems={menuItems} />
+            <LeftNav ref="leftNav" docked={false} onRequestChange={open => this.setState({open})} open={this.state.open}>
+              <MenuItem onTouchTap={this.change}>首页</MenuItem>
+              <MenuItem onTouchTap={this.change}>气质测评报告</MenuItem>
+              <MenuItem onTouchTap={this.change}>每日问答报告</MenuItem>
+            </LeftNav>
               <AppBar title="小宝家+" onLeftIconButtonTouchTap={this.change} iconElementRight={RightIcon} />
             <Card style={{paddingTop:64}}>
             <CardMedia>
