@@ -1,6 +1,7 @@
 FlowRouter.route('/', {
-	action: function() {
+	action: function(params, queryParams) {
 		ReactLayout.render(MainLayout, {
+			location: {pathname: params},
 			listToolBar: true,
 		    main: <Test />,
 		    bottom: "Test"
@@ -12,8 +13,9 @@ FlowRouter.route('/course/:id', {
 	triggersEnter: function () {
 
 	},
-	action: function() {
+	action: function(params, queryParams) {
 		ReactLayout.render(MainLayout, {
+			location: {pathname: params},
 		    appBar: <DetailAppBar title='课程详情' />,
 		    main: <CourseView />,
 		    bottom: "Test"
