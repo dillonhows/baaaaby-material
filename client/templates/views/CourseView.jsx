@@ -1,17 +1,9 @@
 //app.jsx
 injectTapEventPlugin();
 
-let {
-    SvgIcons
-} = MUI.Libs,
-
-{
-    Card,
-    CardMedia,
-    CardTitle,
-    CardText,
-    Checkbox
-} = MUI;
+let { SvgIcons } = MUI.Libs,
+    { Card, CardMedia, CardTitle, CardText, Checkbox } = MUI;
+const ReactTransitionGroup = React.addons.TransitionGroup;
 
 CourseView = class extends React.Component{
 
@@ -19,13 +11,9 @@ CourseView = class extends React.Component{
         super(props);
     }
 
-    goBack() {
-        FlowRouter.redirect('/');
-    }
-
     render() {
         return (
-            <Card style={{paddingTop:64}}>
+            <Card style={{paddingTop: 64}}>
                 <CardMedia overlay={<CardTitle title="新闻" subtitle="小宝家+"/>}>
                     <img src="/img/1.jpg" />
                 </CardMedia>
