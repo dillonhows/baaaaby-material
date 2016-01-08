@@ -14,7 +14,7 @@ let {
 DetailAppBar = class extends React.Component{
 
     goBack() {
-        FlowRouter.redirect('/');
+        window.history.back();
     }
 
 	render() {

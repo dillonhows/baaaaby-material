@@ -1,12 +1,6 @@
 // 左侧菜单
 
-let {
-	MenuItem
-} = MUI.Libs,
-
-{
-    LeftNav
-} = MUI;
+let { LeftNav, MenuItem } = MUI;
 
 LeftNavView = class LeftMenu extends React.Component {
     constructor(props) {
@@ -23,7 +17,7 @@ LeftNavView = class LeftMenu extends React.Component {
 
 	closeLeftMenu(url) {
 		this.props.close();
-		FlowRouter.redirect(url);
+		FlowRouter.go(url);
 	}
 
 	render() {

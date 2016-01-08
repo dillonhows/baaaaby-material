@@ -2,29 +2,8 @@
 
 injectTapEventPlugin();
 
-let {
-	SvgIcons,
-	Menu,
-	MenuItem,
-	IconMenu
-} = MUI.Libs,
-
-{
-    AppCanvas,
-    IconButton,
-    MenuDivider,
-    RaisedButton,
-    Card,
-    CardMedia,
-    CardTitle,
-    CardText,
-    List,
-    ListItem,
-    GridList,
-    GridTile,
-    FloatingActionButton
-} = MUI;
-
+let { SvgIcons, Menu, MenuItem, IconMenu } = MUI.Libs,
+{ AppCanvas, IconButton, MenuDivider, RaisedButton, Card, CardMedia, CardTitle, CardText, List, ListItem, GridList, GridTile, FloatingActionButton } = MUI;
 Test = class extends React.Component{
 
     constructor(props) {
@@ -39,7 +18,7 @@ Test = class extends React.Component{
     }
 
     clickMe() {
-		FlowRouter.redirect('/course/id');
+    	FlowRouter.go('/course/id');
     }
 
 	render() {
@@ -101,9 +80,9 @@ Test = class extends React.Component{
 	}
 
 	componentDidMount() {
-		var mySwiper = new Swiper('.swiper-container', {
+		/*var mySwiper = new Swiper('.swiper-container', {
 			autoplay: 5000,//可选选项，自动滑动
 		// loop: true
-		});
+		});*/
 	}
 }
