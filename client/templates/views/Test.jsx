@@ -24,7 +24,7 @@ Test = class extends React.Component{
 	render() {
 
 		return (
-			<div>
+			<div style={{position: 'absolute'}}>
 				<div className="swiper-container">
 					<div className="swiper-wrapper" style={{paddingTop:64}}>
 						<div className="swiper-slide">

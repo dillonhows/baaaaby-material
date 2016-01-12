@@ -1,34 +1,29 @@
 FlowRouter.route('/', {
 	action: function(params, queryParams) {
 		ReactLayout.render(MainLayout, {
-			location: {pathname: params},
+			rootNum: 0,
 			listToolBar: true,
-		    main: <Test />,
+		    main: <Test key="Test" />,
 		    bottom: "Test"
 		});
 	}
 });
 
 FlowRouter.route('/course/:id', {
-	triggersEnter: function () {
-
-	},
 	action: function(params, queryParams) {
 		ReactLayout.render(MainLayout, {
-			location: {pathname: params},
+			rootNum: 1,
 		    appBar: <DetailAppBar title='课程详情' />,
-		    main: <CourseView />,
+		    main: <CourseView key="Course" />,
 		    bottom: "Test"
 		});
-	},
-	triggersExit: function() {
-		
 	}
 });
 
 FlowRouter.route('/temperament', {
 	action: function() {
 		ReactLayout.render(MainLayout, {
+			rootNum: 2,
 			appBar: <DetailAppBar title='气质测评列表' />,
 			main: <TemperamentList />,
 			bottom: "Test"
