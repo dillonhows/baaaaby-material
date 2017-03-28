@@ -11,26 +11,43 @@ CourseView = class extends React.Component{
         super(props);
     }
 
-    render() {
+    getMeteorData() {
+        let course = Meteor.subscribe( "course", "56589d349a26e56f07175796" );
+        data = {};
+        if (course.ready()) {
+            data.course = Courses.findOne();
+        }
+        return data;
+    }
+
+    renderContent() {
+        const htmlString = {
+            __html: this.data.course.content
+        };
         return (
-            <Card style={{paddingTop: 64}}>
-                <CardMedia overlay={<CardTitle title="新闻" subtitle="小宝家+"/>}>
+            <Card>
+                <CardMedia overlay={<CardTitle title={this.data.course.title || "新闻"} subtitle="小宝家+"/>}>
                     <img src="/img/1.jpg" />
                 </CardMedia>
-                <CardText>
-                    我们的课程内容.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                    Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                    Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                </CardText>
-                <Checkbox
+                <CardText dangerouslySetInnerHTML={htmlString} />
+                {/* 这里的代码会使动画产生Bug,暂时屏蔽 */}
+                {/* <Checkbox
                     name="checkboxName4"
                     value="checkboxValue4"
                     checkedIcon={<SvgIcons.ToggleStar />}
                     unCheckedIcon={<SvgIcons.ToggleStarBorder />}
-                    label="custom icon" />
+                    label="custom icon" /> */}
             </Card>
         );
     }
+
+    render() {
+        return (
+            <div style={{position: 'absolute', paddingTop: 64, width: '100%'}}>
+                {this.data.course ? this.renderContent() : "骚等..."}
+            </div>
+        );
+    }
 }
+
+reactMixin(CourseView.prototype, ReactMeteorData);

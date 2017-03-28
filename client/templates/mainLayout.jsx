@@ -14,7 +14,7 @@ MainLayout = class extends React.Component{
         this.state = {
             open: false,
             colorText: true,
-            oldView: this.props.main
+            transitionName: 'enter'
         };
         this.change = this.change.bind(this);
         this.changeCol = this.changeCol.bind(this);
@@ -54,31 +54,19 @@ MainLayout = class extends React.Component{
         );
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        const _this = this;
-        // console.log(nextProps === this.props);
-        // 通过nextProps自己写补间...?
-        if (nextProps !== this.props) {
-            this.setState({oldView: this.props.main});
-            document.getElementById('enter').style.opacity = 0;
-            document.getElementById('enter').style.transition = '';
-            document.getElementById('leave').style.opacity = 1;
-            document.getElementById('leave').style.transition = '';
-            setTimeout(function () {
-                document.getElementById('enter').style.opacity = 1;
-            document.getElementById('enter').style.transition = 'opacity .5s ease-in';
-                document.getElementById('leave').style.opacity = 0;
-            document.getElementById('leave').style.transition = 'opacity .5s ease-in';
-            },1);
-            setTimeout(function () {
-                _this.setState({oldView: null});
-            },501);
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.rootNum !== this.props.rootNum) {
+            if (nextProps.rootNum > this.props.rootNum) {
+                this.setState({transitionName: 'enter'});
+            } else {
+                this.setState({transitionName: 'leave'});
+            }
         }
-    }
+    }   
 
 	render() {
 		return (
-            <div>
+            <div style={{position: 'relative', height: '100%', width: '100%', overflow: 'auto'}}>
                 <header>
                     <title>小宝家+</title>
                     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -89,8 +77,9 @@ MainLayout = class extends React.Component{
                 <AppCanvas>
                     { this.props.listToolBar ? this.renderListToolBar() : this.props.appBar }
     				{ this.props.listToolBar ? <LeftNavView open={this.state.open} close={this.closeLeftMenu} /> : '' }
-                    <div id='leave' style={{opacity: 1, position: 'absolute', transition: 'opacity .5s ease-in'}}>{this.state.oldView}</div>
-			        <div id='enter' style={{opacity: 0, transition: 'opacity .5s ease-in'}}>{this.props.main}</div>
+                    <ReactCSSTransitionGroup transitionName={this.state.transitionName} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+                        {this.props.main}
+                    </ReactCSSTransitionGroup>
     			</AppCanvas>
             </div>
 		);

@@ -19,9 +19,11 @@ DetailAppBar = class extends React.Component{
 
 	render() {
 		return (
-			<AppCanvas>
-				<AppBar title={this.props.title} iconElementLeft={<IconButton onClick={this.goBack}><SvgIcons.NavigationArrowBack /></IconButton>}/>
-			</AppCanvas>
+			<div style={{height: 0}}>
+				<AppCanvas>
+					<AppBar title={this.props.title} iconElementLeft={<IconButton onClick={this.goBack}><SvgIcons.NavigationArrowBack /></IconButton>}/>
+				</AppCanvas>
+			</div>
 		);
 	}
 }

@@ -12,6 +12,7 @@ TemperamentList = class extends React.Component{
 	getStyles() {
 		const styleSheet = {
 			bodyStyle: {
+				position: 'absolute',
 				paddingTop: 64
 			},
 			CardStyle: {
